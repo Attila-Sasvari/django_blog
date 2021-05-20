@@ -31,3 +31,4 @@ class Blog(models.Model):
         #do_something()
         super().save(*args, **kwargs)  # Call the "real" save() method.
         #do_something_else()
+        

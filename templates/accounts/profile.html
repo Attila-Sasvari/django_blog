@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+<main class="col px-5">
+
+  <h1 class="text-center py-3">My Profile</h1>
+
+  <h4>Name: <span class="lead">{{ username }}</span></h4>
+  <h4>Last login: <span class="lead">{{ last_login }}</span></h4>
+  <h4>Is superuser: <span class="lead">{{ is_superuser }}</span></h4>
+  <h4>Email address: <span class="lead">{{ email }}</span></h4>
+  <h4>Last login: <span class="lead">{{ first_name }} {{   last_name }}</span></h4>
+
+  <h2>{{ user.get_full_name }}</h2>
+  <ul>
+    <li>Username: {{ user.username }}</li>
+    <li>Location: {{ user.profile.location }}</li>
+    <li>Birth Date: {{ user.profile.birth_date }}</li>
+  </ul>
+  <h4>Bio:</h4>
+  <p>{{ user.profile.bio }}</p>
+  <a href="{% url 'update_profile' %}" class="btn btn-sm btn-danger">Update profile</a>
+
+  
+</main>
+{% endblock %}

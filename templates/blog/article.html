@@ -34,9 +34,16 @@
     </nav>
     <h1 class="text-center py-3">{{ title }}</h1>
     <br>
+    <p>Read by <span class="badge bg-secondary">{{ read_number }}</span> times.</p>
+    <p>Loved by <span class="badge bg-secondary">{{ stars_number }}</span> times.</p>
     <h3>{{ lead }}</h3>
     <br>
     {{ entry | safe }}
+
+    <form method="post" name="add_star" action="{% url 'add_star' id %}">
+        {% csrf_token %}
+        <button type="submit">Add star</button>
+      </form>
 </main>
 
 {% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+<main class="col px-5">
+
+  <h1 class="text-center py-3">My Profile</h1>
+
+  <h4>Name: <span class="lead"></span></h4>
+  <form method="post">
+    {% csrf_token %}
+    {{ user_form.as_p }}
+    {{ profile_form.as_p }}
+    <button type="submit">Save changes</button>
+  </form>
+  <a href="{% url 'view_profile'%}" class="btn btn-sm btn-success">Back to profile</a>
+  
+</main>
+{% endblock %}

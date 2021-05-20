@@ -1,6 +1,57 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
+from django.db import transaction
+from .forms import UserForm, ProfileForm
+
+from .models import Profile
+
+def view_profile(request):
+  if request.user.is_authenticated:
+    user = request.user
+    current_user = {
+      "id": user.id,
+      "username": user.username,
+      "user_permissions": user.user_permissions,
+      "first_name": user.first_name,
+      "last_name": user.last_name,
+      "last_login": user.last_login,
+      "is_superuser": user.is_superuser,
+      "email": user.email
+    }
+  else:
+    return redirect('login')
+
+  return render(request, 'accounts/profile.html', current_user)
+
+def fixme(request):
+    users = User.objects.all()
+    for user in users:
+        obj, created = Profile.objects.get_or_create(user=user)
+        print(user.username,' : ',created)
+    print("all done")
+    return HttpResponse("It's done.")
+
+@transaction.atomic
+def update_profile(request):
+    if request.method == 'POST':
+        user_form = UserForm(request.POST, instance=request.user)
+        profile_form = ProfileForm(request.POST, instance=request.user.profile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, 'Your profile was successfully updated!')
+            return redirect('view_profile')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        user_form = UserForm(instance=request.user)
+        profile_form = ProfileForm(instance=request.user.profile)
+    return render(request, 'accounts/edit_profile.html', {
+        'user_form': user_form,
+        'profile_form': profile_form
+    })
+
 
 def register(request):
   if request.method == 'POST':

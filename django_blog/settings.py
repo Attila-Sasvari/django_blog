@@ -127,6 +127,9 @@ USE_L10N = True
 
 USE_TZ = True
 
+YEAR_CHOICES = [1986, 1987, 1988, 1989, 1990]
+DATE_INPUT_FORMATS = ['%Y-%m-%d', '%m/%d/%Y', '%m/%d/%y']
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
