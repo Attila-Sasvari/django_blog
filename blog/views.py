@@ -17,7 +17,7 @@ def blog(request):
         'articles': paged_articles
     }
 
-    return render(request, 'pages/blog.html', context)
+    return render(request, 'blog/blog.html', context)
 
 def article(request, blog_id):
     article = get_object_or_404(Blog, pk=blog_id)
@@ -34,4 +34,4 @@ def article(request, blog_id):
         "read_number": article.read_number
     }
 
-    return render(request, 'pages/article.html', context)
+    return render(request, 'blog/article.html', context)

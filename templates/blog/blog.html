@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% load static %}
+
+{% block title %}Blog {% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/markdown.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="col px-5">
+    <nav class="navbar navbar-expand-md navbar-light">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar2"
+                aria-controls="navbar2" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="justify-content-between mb-3" id="navbar">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active font-weight-bold py-0 ps-0 small" aria-current="page" href="#"
+                            style="font-weight: 400">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link font-weight-bold  py-0 ps-3 small" style="font-weight: 400" href="#">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link font-weight-bold py-0 ps-3 small" style="font-weight: 400"
+                            href="#">Services</a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+    <h1 class="text-center py-1">BLOG</h1>
+    <br>
+    {% for a in articles %}
+    <div>
+        <p><small>{{ a.category }}</small></p>
+        <h3>{{ a.title }}</h3>
+        <h5>{{ a.lead }}</h5>
+        <p><small>Delivered to you by </small>{{ a.author}}</p>
+        <p><small>Last updated: </small>{{ a.updated_at | naturalday }}</p>
+        <a href="{% url 'article' a.id %}" role=button class="btn btn-sm btn-warning">Continue reading</a>
+    </div>
+    {% endfor %}
+</main>
+{% endblock %}
