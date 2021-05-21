@@ -2,15 +2,15 @@ from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 import markdown
-from .models import Blog
+from .models import Blog, BlogCounts
 from django.db import transaction
 from django.contrib import messages
 
 md = markdown.Markdown()
 
+
 def blog(request):
     articles = Blog.objects.order_by('-updated_at').filter(is_published=True)
-
     paginator = Paginator(articles, 5)
     page = request.GET.get('page')
     paged_articles = paginator.get_page(page)
@@ -21,8 +21,11 @@ def blog(request):
 
     return render(request, 'blog/blog.html', context)
 
+
 def article(request, blog_id):
     article = get_object_or_404(Blog, pk=blog_id)
+    article.blogcounts.read_number += 1
+    article.blogcounts.save(update_fields=['read_number'])
 
     context = {
         "id": article.id,
@@ -32,22 +35,19 @@ def article(request, blog_id):
         "category": article.category,
         "author": article.author,
         "updated_at": article.updated_at,
-        "read_number": article.read_number,
-        "stars_number": article.stars_number
+        "read_number": article.blogcounts.read_number,
+        "stars_number": article.blogcounts.stars_number
     }
 
-    article.read_number += 1
-    article.save()
-
     return render(request, 'blog/article.html', context)
+
 
 @transaction.atomic
 def add_star(request, blog_id):
     if request.method == 'POST':
         article = get_object_or_404(Blog, pk=blog_id)
-        article.stars_number += 1
-        article.save(update_fields=['stars_number'])
-        messages.success(request, 'Star added!')
+        article.blogcounts.stars_number += 1
+        article.blogcounts.save(update_fields=['stars_number'])
 
         context = {
             "id": article.id,
@@ -57,9 +57,10 @@ def add_star(request, blog_id):
             "category": article.category,
             "author": article.author,
             "updated_at": article.updated_at,
-            "read_number": article.read_number,
-            "stars_number": article.stars_number
+            "read_number": article.blogcounts.read_number,
+            "stars_number": article.blogcounts.stars_number
         }
+
         return render(request, 'blog/article.html', context)
     else:
         return

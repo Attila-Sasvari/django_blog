@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 
 class Blog(models.Model):
     CATEGORIES = [
@@ -10,9 +13,9 @@ class Blog(models.Model):
     title = models.CharField(max_length=200)
     lead = models.TextField(blank=False)
     category = models.CharField(
-        max_length = 10,
-        choices = CATEGORIES,
-        default = "tech",
+        max_length=10,
+        choices=CATEGORIES,
+        default="tech",
     )
     cover_img = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
@@ -21,14 +24,17 @@ class Blog(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=True)
     is_featured = models.BooleanField(default=False)
-    read_number = models.PositiveIntegerField(default=0)
-    stars_number = models.PositiveIntegerField(default=0)
 
     class Meta:
         ordering = ["updated_at"]
 
     def save(self, *args, **kwargs):
-        #do_something()
-        super().save(*args, **kwargs)  # Call the "real" save() method.
-        #do_something_else()
-        
+        super().save(*args, **kwargs)
+        post = Blog.objects.get(pk=self.id)
+        obj, created = BlogCounts.objects.get_or_create(blog_id=post)
+
+
+class BlogCounts(models.Model):
+    blog_id = models.OneToOneField(Blog, on_delete=models.CASCADE)
+    read_number = models.PositiveIntegerField(default=0)
+    stars_number = models.PositiveIntegerField(default=0)
