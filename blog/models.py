@@ -27,11 +27,15 @@ class Blog(models.Model):
 
     class Meta:
         ordering = ["updated_at"]
+        app_label = "blog"
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         post = Blog.objects.get(pk=self.id)
         obj, created = BlogCounts.objects.get_or_create(blog_id=post)
+
+    def __str__(self):
+        return self.title
 
 
 class BlogCounts(models.Model):

@@ -6,11 +6,16 @@
                 class="bi bi-x-diamond px-3"></i>WebDev</button>
     </div>
 
+    {% if user.is_authenticated %}
+    <p class="small text-white text-center py-1 mb-0">Welcome {{ user.first_name }}</p>
+    {% endif %}
+
     <hr class="text-white w-100 my-1 text-center">
 
     <ul class="nav flex-column my-4" id="#navbar_ul">
         <li class="nav-item w-100">
-            <a href="{% url 'blog' %}" class="small nav-link d-flex align-items-center justify-content w-100 text-white ms-3">
+            <a href="{% url 'blog' %}"
+                class="small nav-link d-flex align-items-center justify-content w-100 text-white ms-3">
                 <i class="bi bi-columns small text-white me-4"></i>
                 <span class="small me-5">Blog</span>
             </a>
@@ -33,19 +38,20 @@
 
     <ul class="nav flex-column my-4" id="#navbar_ul">
         <li class="nav-item w-100">
-            <a href="{% url 'view_profile' %}" class="small nav-link d-flex align-items-center justify-content w-100 text-white ms-3">
+            <a href="{% url 'view_profile' %}"
+                class="small nav-link d-flex align-items-center justify-content w-100 text-white ms-3">
                 <i class="bi bi-emoji-sunglasses small text-white me-4"></i>
                 <span class="small me-5">My Profile</span>
             </a>
         </li>
         <li class="nav-item w-100">
-            <a href="#" class="small nav-link d-flex align-items-center justify-content w-100 text-white ms-3">
+            <a href="{% url 'my_articles' %}" class="small nav-link d-flex align-items-center justify-content w-100 text-white ms-3">
                 <i class="bi bi-chat-left small text-white me-4"></i>
                 <span class="small me-5">My Articles</span>
             </a>
         </li>
         <li class="nav-item w-100">
-            <a href="#" class="small nav-link d-flex align-items-center justify-content w-100 text-white ms-3">
+            <a href="{% url 'my_drafts' %}" class="small nav-link d-flex align-items-center justify-content w-100 text-white ms-3">
                 <i class="bi bi-chat-left small text-white me-4"></i>
                 <span class="small me-5">My Drafts</span>
             </a>
@@ -59,7 +65,7 @@
 
     </ul>
 
- 
+
     <hr class="text-white w-100 my-2 text-center">
 
     <ul class="nav flex-column my-4" id="#navbar_ul">
@@ -69,18 +75,34 @@
                 <span class="small me-5">About</span>
             </a>
         </li>
+        {% if user.is_authenticated %}
         <li class="nav-item w-100">
-            <a href="{% url 'login' %}" class="small nav-link d-flex align-items-center justify-content w-100 text-white ms-3">
+            <a href="javascript:{document.getElementById('logout').submit()}"
+                class="small nav-link d-flex align-items-center justify-content w-100 text-white ms-3">
+                <i class="bi bi-emoji-sunglasses small text-white me-4"></i>
+                <span class="small me-5">Logout</span>
+            </a>
+            <form action="{% url 'logout' %}" method="POST" id="logout">
+                {% csrf_token %}
+                <input type="hidden">
+            </form>
+        </li>
+        {% else %}
+        <li class="nav-item w-100">
+            <a href="{% url 'login' %}"
+                class="small nav-link d-flex align-items-center justify-content w-100 text-white ms-3">
                 <i class="bi bi-emoji-sunglasses small text-white me-4"></i>
                 <span class="small me-5">Login</span>
             </a>
         </li>
         <li class="nav-item w-100">
-            <a href="{% url 'register' %}" class="small nav-link d-flex align-items-center justify-content w-100 text-white ms-3">
+            <a href="{% url 'register' %}"
+                class="small nav-link d-flex align-items-center justify-content w-100 text-white ms-3">
                 <i class="bi bi-binoculars small text-white me-4"></i>
                 <span class="small me-5">Register</span>
             </a>
         </li>
+        {% endif %}
     </ul>
     <hr class="text-white w-100 my-2 text-center">
 

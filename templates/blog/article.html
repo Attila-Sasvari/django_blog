@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load static %}
+{% load admin_urls %}
 
 {% block title %}Article {% endblock %}
 
@@ -36,6 +37,7 @@
     <br>
     <p>Read by <span class="badge bg-secondary">{{ read_number }}</span> times.</p>
     <p>Loved by <span class="badge bg-secondary">{{ stars_number }}</span> times.</p>
+    <a href="{% url 'edit_article' id %}" role=button class="btn btn-sm btn-danger">Edit article</a>
     <h3>{{ lead }}</h3>
     <br>
     {{ entry | safe }}

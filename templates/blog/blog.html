@@ -39,6 +39,31 @@
     </nav>
     <h1 class="text-center py-1">BLOG</h1>
     <br>
+    <form action="{% url 'search_blog' %}">
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <label class="sr-only">Content</label>
+                <input type="text" name="content" class="form-control" placeholder="Content"
+                    value="{{ values.content }}">
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label class="sr-only">Title</label>
+                <input type="text" name="title" class="form-control" placeholder="Title" value="{{ values.title }}">
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label class="sr-only">Category</label>
+                <select name="category" class="form-control">
+                    <option selected="true" disabled="disabled">Category (All)</option>
+                    {% for key,value in category_list.items %}
+                    <option value="{{ key }}">{{ value }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <button class="btn btn-secondary btn-block mt-4" type="submit">Submit form</button>
+    </form>
     {% for a in articles %}
     <div>
         <p><small>{{ a.category }}</small></p>
