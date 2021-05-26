@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'blog',
     'accounts',
+    'api',
+    'dashboard',
 ]
 
 MIDDLEWARE = [
@@ -127,7 +129,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-YEAR_CHOICES = [1986, 1987, 1988, 1989, 1990]
+YEAR_CHOICES = [1986, 1987, 1988, 1989, 1990, 1991, 1992, 1993]
 DATE_INPUT_FORMATS = ['%Y-%m-%d', '%m/%d/%Y', '%m/%d/%y']
 
 
