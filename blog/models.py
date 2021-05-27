@@ -2,6 +2,14 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+#from django.shortcuts import reverse
+
+
+class Tag(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Blog(models.Model):
@@ -10,23 +18,25 @@ class Blog(models.Model):
         ("fitnes", 'fitnes'),
         ("money", 'money'),
     ]
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=200, unique=True)
     lead = models.TextField(blank=False)
     category = models.CharField(
         max_length=10,
         choices=CATEGORIES,
         default="tech",
     )
+    slug = models.SlugField(max_length=255, unique=True, null=True)
     cover_img = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
-    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    author = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
     content = models.TextField(default="-")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=True)
     is_featured = models.BooleanField(default=False)
+    tags = models.ManyToManyField(Tag, blank=True)
 
     class Meta:
-        ordering = ["updated_at"]
+        ordering = ["-updated_at"]
         app_label = "blog"
 
     def save(self, *args, **kwargs):
@@ -36,6 +46,9 @@ class Blog(models.Model):
 
     def __str__(self):
         return self.title
+    
+"""     def get_absolute_url(self):
+        return reverse("blog:post", kwargs={"slug": self.slug}) """
 
 
 class BlogCounts(models.Model):

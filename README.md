@@ -31,3 +31,5 @@ Backup
 Social media login
 
 Stripe
+
+GraphQL
