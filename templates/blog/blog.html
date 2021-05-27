@@ -69,9 +69,10 @@
         <p><small>{{ a.category }}</small></p>
         <h3>{{ a.title }}</h3>
         <h5>{{ a.lead }}</h5>
+        <p>{{ a.content | safe | slice:":200"}}...</p>
+        <a href="{% url 'article' a.id %}" role=button class="btn btn-sm btn-warning">Continue reading</a>
         <p><small>Delivered to you by </small>{{ a.author}}</p>
         <p><small>Last updated: </small>{{ a.updated_at | naturalday }}</p>
-        <a href="{% url 'article' a.id %}" role=button class="btn btn-sm btn-warning">Continue reading</a>
     </div>
     {% endfor %}
 </main>
