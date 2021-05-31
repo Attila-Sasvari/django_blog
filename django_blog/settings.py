@@ -89,16 +89,6 @@ DATABASES = {
     }
 }
 
-""" DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'btredb',
-        'USER': 'postgres',
-        'PASSWORD': '123456',
-        'HOST': 'localhost'
-    }
-} """
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -173,6 +163,6 @@ CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = ("http://localhost:8080",)
 
 try:
-    from local_settings import *
+    from .local_settings import *
 except ImportError:
-    pass
+    print("============IMPORT error==================")

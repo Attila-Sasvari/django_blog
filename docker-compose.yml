@@ -10,6 +10,8 @@ services:
       - .:/app/
     ports:
       - 8000:8000
+    expose:
+      - 8000
     env_file:
       - ./.env.dev
     depends_on:
@@ -17,13 +19,13 @@ services:
   db:
     image: postgres:13-alpine
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - postgres_data:/var/lib/postgresql/data
     expose:
       - 5432
     environment:
-      - POSTGRES_USER=hello_django
-      - POSTGRES_PASSWORD=hello_django
-      - POSTGRES_DB=hello_django_dev
+      - POSTGRES_USER=django_blog
+      - POSTGRES_PASSWORD=django_blog
+      - POSTGRES_DB=django_blog_dev
     
 volumes:
   postgres_data:

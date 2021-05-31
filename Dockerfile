@@ -10,18 +10,11 @@ ENV PYTHONUNBUFFERED 1
 
 # install psycopg2 dependencies
 RUN apt-get update && \
+    apt-get install -y netcat && \
     apt-get install -y --no-install-recommends gcc
-
-
 
 # install dependencies
 RUN pip install --upgrade pip
-
-# linting
-#RUN pip install flake8==3.9.1
-#COPY . .
-#RUN flake8 --ignore=E501,F401 .
-
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt
 
@@ -31,8 +24,6 @@ COPY ./entrypoint.sh .
 # copy project
 COPY . .
 
-# run entrypoint.sh
-#RUN /app/entrypoint.sh
-
+EXPOSE 8000 
 
 ENTRYPOINT ["/app/entrypoint.sh"]

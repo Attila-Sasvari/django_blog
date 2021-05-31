@@ -2,26 +2,36 @@
 
 Create resource
 
+## From Dockerfile
+
 ```
 # build image from Dockerfile
 docker build . -t django-webapp -f ./Dockerfile
-docker build -f ./Dockerfile -t hello_django:latest .
+docker build -f ./Dockerfile -t django_blog:latest .
 
 # start container from image
 docker run -di -p 8000:8000 django-webapp
 ```
 
-docker compose
+## From docker compose
 
 ```
+
 docker-compose -f docker-compose.yml up -d --build
+docker-compose -f docker-compose.prod.yml exec web python manage.py migrate --noinput
+docker-compose -f docker-compose.prod.yml exec web python manage.py collectstatic --no-input --clear
 
-$ docker-compose -f docker-compose.prod.yml down -v
-$ docker-compose -f docker-compose.prod.yml up -d --build
-$ docker-compose -f docker-compose.prod.yml exec web python manage.py migrate --noinput
+# bring down
+docker-compose -f docker-compose.prod.yml down -v
+
+# check logs
+docker-compose -f docker-compose.prod.yml logs -f
+
+# connect to postgresql
+docker-compose exec db psql --username=django_traefik --dbname=django_traefik
 ```
 
-Stop and remove resource
+## Stop and remove resource
 
 ```
 # stop all running container
