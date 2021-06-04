@@ -62,11 +62,14 @@ def article(request, blog_id):
     article.blogcounts.read_number += 1
     article.blogcounts.save(update_fields=['read_number'])
 
+    print(dir(article))
+
     context = {
         "id": article.id,
         "entry": md.convert(article.content),
         "title": article.title,
         "lead": article.lead,
+        "tags": article.tags,
         "category": article.category,
         "author": article.author,
         "updated_at": article.updated_at,

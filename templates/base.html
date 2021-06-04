@@ -15,12 +15,12 @@
   <title>Django App | {% block title %}{% endblock %}</title>
 </head>
 
-<body class="container-fluid p-0" style="background-color: #f1f3f3">
-  <div class="row">
+<body class="container-fluid d-flex flex-fill" style="background-color: #f1f3f3">
+  <div class="row flex-fill">
     {% include 'partials/_sidebar.html' %}
     {% block content %} {% endblock %}
   </div>
-  {% include 'partials/_footer.html' %}
+
   
   <script src="{% static 'js/jquery-3.6.0.min.js' %} "></script>
   <script src="{% static 'js/bootstrap.bundle.min.js' %} "></script>

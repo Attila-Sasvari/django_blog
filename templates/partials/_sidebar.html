@@ -1,13 +1,23 @@
 {% load static %}
 <!-- Sidebar -->
-<nav class="col-lg1 col-xl-2 col-md-3 col-sm-4 sidebar">
+<nav class="col sidebar">
     <div class="d-flex flex-row justify-content align-items-center flex-wrap">
         <button type="button" class="w-100 btn btn-lg text-white d-flex" href="#"><i
-                class="bi bi-x-diamond px-3"></i>WebDev</button>
+                class="bi bi-x-diamond pe-3"></i>WebDev</button>
     </div>
 
+    <br>
+
     {% if user.is_authenticated %}
-    <p class="small text-white text-center py-1 mb-0">Welcome {{ user.first_name }}</p>
+    <div class="profile-header-container text-center mb-3">
+        <div class="profile-header-img">
+            <img class="img-circle"
+                src="https://lh3.googleusercontent.com/-60pK_2LG9e4/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucnR3jXZZdznK-xkGPgJJQ_uW2K9Gg/photo.jpg?sz=120" />
+            <div class="rank-label-container">
+                <span class="label label-default text-white small rank-label">{{ user.username }}</span>
+            </div>
+        </div>
+    </div>
     {% endif %}
 
     <hr class="text-white w-100 my-1 text-center">
@@ -15,19 +25,19 @@
     <ul class="nav flex-column my-4" id="#navbar_ul">
         <li class="nav-item w-100">
             <a href="{% url 'blog' %}"
-                class="small nav-link d-flex align-items-center justify-content w-100 text-white ms-3">
+            class="small nav-link d-flex align-items-center justify-content w-100 text-white">
                 <i class="bi bi-columns small text-white me-4"></i>
                 <span class="small me-5">Blog</span>
             </a>
         </li>
         <li class="nav-item w-100">
-            <a href="#" class="small nav-link d-flex align-items-center justify-content w-100 text-white ms-3">
+            <a href="#" class="small nav-link d-flex align-items-center justify-content w-100 text-white">
                 <i class="bi bi-binoculars small text-white me-4"></i>
                 <span class="small me-5">Dashboard</span>
             </a>
         </li>
         <li class="nav-item w-100">
-            <a href="#" class="small nav-link d-flex align-items-center justify-content w-100 text-white ms-3">
+            <a href="#" class="small nav-link d-flex align-items-center justify-content w-100 text-white">
                 <i class="bi bi-columns small text-white me-4"></i>
                 <span class="small me-5">Authors</span>
             </a>
@@ -39,25 +49,28 @@
     <ul class="nav flex-column my-4" id="#navbar_ul">
         <li class="nav-item w-100">
             <a href="{% url 'view_profile' %}"
-                class="small nav-link d-flex align-items-center justify-content w-100 text-white ms-3">
+            class="small nav-link d-flex align-items-center justify-content w-100 text-white">
                 <i class="bi bi-emoji-sunglasses small text-white me-4"></i>
                 <span class="small me-5">My Profile</span>
             </a>
         </li>
         <li class="nav-item w-100">
-            <a href="{% url 'my_articles' %}" class="small nav-link d-flex align-items-center justify-content w-100 text-white ms-3">
+            <a href="{% url 'my_articles' %}"
+            class="small nav-link d-flex align-items-center justify-content w-100 text-white">
                 <i class="bi bi-chat-left small text-white me-4"></i>
                 <span class="small me-5">My Articles</span>
             </a>
         </li>
         <li class="nav-item w-100">
-            <a href="{% url 'my_drafts' %}" class="small nav-link d-flex align-items-center justify-content w-100 text-white ms-3">
+            <a href="{% url 'my_drafts' %}"
+            class="small nav-link d-flex align-items-center justify-content w-100 text-white">
                 <i class="bi bi-chat-left small text-white me-4"></i>
                 <span class="small me-5">My Drafts</span>
             </a>
         </li>
         <li class="nav-item w-100">
-            <a href="{% url 'dashboard' %}" class="small nav-link d-flex align-items-center justify-content w-100 text-white ms-3">
+            <a href="{% url 'dashboard' %}"
+            class="small nav-link d-flex align-items-center justify-content w-100 text-white">
                 <i class="bi bi-binoculars small text-white me-4"></i>
                 <span class="small me-5">My Stats</span>
             </a>
@@ -70,7 +83,7 @@
 
     <ul class="nav flex-column my-4" id="#navbar_ul">
         <li class="nav-item w-100">
-            <a href="#" class="small nav-link d-flex align-items-center justify-content w-100 text-white ms-3">
+            <a href="#" class="small nav-link d-flex align-items-center justify-content w-100 text-white">
                 <i class="bi bi-file-code small text-white me-4"></i>
                 <span class="small me-5">About</span>
             </a>
@@ -78,7 +91,7 @@
         {% if user.is_authenticated %}
         <li class="nav-item w-100">
             <a href="javascript:{document.getElementById('logout').submit()}"
-                class="small nav-link d-flex align-items-center justify-content w-100 text-white ms-3">
+            class="small nav-link d-flex align-items-center justify-content w-100 text-white">
                 <i class="bi bi-emoji-sunglasses small text-white me-4"></i>
                 <span class="small me-5">Logout</span>
             </a>
@@ -90,14 +103,14 @@
         {% else %}
         <li class="nav-item w-100">
             <a href="{% url 'login' %}"
-                class="small nav-link d-flex align-items-center justify-content w-100 text-white ms-3">
+            class="small nav-link d-flex align-items-center justify-content w-100 text-white">
                 <i class="bi bi-emoji-sunglasses small text-white me-4"></i>
                 <span class="small me-5">Login</span>
             </a>
         </li>
         <li class="nav-item w-100">
             <a href="{% url 'register' %}"
-                class="small nav-link d-flex align-items-center justify-content w-100 text-white ms-3">
+            class="small nav-link d-flex align-items-center justify-content w-100 text-white">
                 <i class="bi bi-binoculars small text-white me-4"></i>
                 <span class="small me-5">Register</span>
             </a>

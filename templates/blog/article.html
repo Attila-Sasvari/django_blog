@@ -1,51 +1,52 @@
 {% extends 'base.html' %}
 
+{% load humanize %}
+
 {% load static %}
 {% load admin_urls %}
 
-{% block title %}Article {% endblock %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/markdown.css' %}">
+{% endblock %}
 
 {% block content %}
 
-<main class="col px-5">
-    <nav class="navbar navbar-expand-md navbar-light">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar2"
-                aria-controls="navbar2" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+<main class="col-lg-10 col-md-2 col-sm-9 px-5 d-flex flex-column text-underline" style="background-color: #fbfcfc">
+    <h1 class="text-center py-3" style="color: #539b6d"><u>Web Dev Blog</u></h1>
 
-            <div class="justify-content-between mb-3" id="navbar">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active font-weight-bold py-0 ps-0 small" aria-current="page" href="#"
-                            style="font-weight: 400">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link font-weight-bold  py-0 ps-3 small" style="font-weight: 400" href="#">Blog</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link font-weight-bold py-0 ps-3 small" style="font-weight: 400"
-                            href="#">Services</a>
-                    </li>
-                </ul>
+    <br>
 
+    <div class="card mt-3 mb-4 shadow rounded">
+
+        <div class="card-body p-5">
+            <h2>{{ title }}</h2>
+            <p class="card-text mb-0">
+                <small class="text-muted">Written by {{ author }}, Last updated {{ updated_at | naturalday }} ago.
+                </small></p>
+            <p class="card-text mb-0 mt-2 text-muted small">Tags: <small class="text-muted small">#redhat
+                    #certification</small></p>
+            <br>
+            {{ entry | safe }}
+
+            <div class="d-flex flex-rowfloat-end align-items-center">
+                <form method="post" name="add_star" action="{% url 'add_star' id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-warning">Upvote</button>
+                </form>
+    
+                <a href="{% url 'edit_article' id %}" role=button class="btn btn-sm btn-danger mx-3">Edit article</a>
             </div>
-        </div>
-    </nav>
-    <h1 class="text-center py-3">{{ title }}</h1>
-    <br>
-    <p>Read by <span class="badge bg-secondary">{{ read_number }}</span> times.</p>
-    <p>Loved by <span class="badge bg-secondary">{{ stars_number }}</span> times.</p>
-    <a href="{% url 'edit_article' id %}" role=button class="btn btn-sm btn-danger">Edit article</a>
-    <h3>{{ lead }}</h3>
-    <br>
-    {{ entry | safe }}
 
-    <form method="post" name="add_star" action="{% url 'add_star' id %}">
-        {% csrf_token %}
-        <button type="submit">Add star</button>
-      </form>
+            
+
+        </div>
+        <div class="card-header linearbackground text-white" style="background-color: #81fbae">
+            <small class="float-end px-2" style="font-weight: 600;">Read <span class="badge bg-secondary ms-2 me-4">{{ read_number }}</span></small>
+            <small class="float-end px-2" style="font-weight: 600;">Upvoted <span class="badge bg-secondary ms-2">{{ stars_number }}</span></small>
+        </div>
+    </div>
 </main>
 
 {% endblock %}
