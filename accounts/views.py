@@ -16,7 +16,7 @@ def view_profile(request):
             "first_name": user.first_name,
             "last_name": user.last_name,
             "last_login": user.last_login,
-            "is_superuser": user.is_superuser,
+            "is_superuser": 'Superuser' if user.is_superuser else 'Regular user',
             "email": user.email
         }
     else:
@@ -32,6 +32,9 @@ def fixme(request):
         print(user.username, ' : ', created)
     print("all done")
     return HttpResponse("It's done.")
+
+def authors(request):
+    return render(request, 'authors.html')
 
 
 @transaction.atomic

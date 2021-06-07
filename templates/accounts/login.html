@@ -3,36 +3,37 @@
 {% block title %}Account Login {% endblock %}
 
 {% block content %}
-<section id="login" class="col p-5 bg-light">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 mx-auto">
-          <div class="card">
-            <div class="card-header bg-primary text-white">
-              <h4>
-                <i class="fas fa-sign-in-alt"></i> Login</h4>
-            </div>
-            <div class="card-body">
-              <!-- Alerts -->
-              {% include 'partials/_alerts.html' %}
-                <form action="{% url 'login' %}" method="POST">
-                  {% csrf_token %}
-                <div class="form-group">
-                  <label for="username">Username</label>
-                  <input type="text" name="username" class="form-control" required>
-                </div>
+<section id="login" class="col mt-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 mx-auto">
+        <div class="card mt-3 mb-4 shadow rounded">
+          <div class="card-header linearbackground text-white" style="background-color: #81fbae">
+            <span class="px-2" style="font-weight: 600;">Login User</span>
+          </div>
+          <div class="card-body px-4">
+            <p class="title">Provide your username and password to login.</p>
+            <!-- Alerts
+            {% include 'partials/_alerts.html' %}
+            -->
+            <form action="{% url 'login' %}" method="POST">
+              {% csrf_token %}
+              <div class="form-group my-3">
+                <label for="username" class="small">Username</label>
+                <input type="text" name="username" class="form-control" required>
+              </div>
 
-                <div class="form-group">
-                  <label for="password2">Password</label>
-                  <input type="password" name="password" class="form-control" required>
-                </div>
+              <div class="form-group">
+                <label for="password2" class="small">Password</label>
+                <input type="password" name="password" class="form-control" required>
+              </div>
 
-                <input type="submit" value="Login" class="btn btn-secondary btn-block">
-              </form>
-            </div>
+              <input type="submit" value="Login" class="btn btn-success btn-sm mx-3 mt-3 float-end">
+            </form>
           </div>
         </div>
       </div>
     </div>
-  </section>
-  {% endblock %}
+  </div>
+</section>
+{% endblock %}

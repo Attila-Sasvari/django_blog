@@ -5,26 +5,30 @@
 {% block title %}My Profile{% endblock %}
 
 {% block content %}
-<main class="col-lg-10 col-md-2 col-sm-9 px-5 d-flex flex-column text-underline" style="background-color: #fbfcfc">
+<section id="view_profile" class="col mt-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <div class="card mt-3 mb-4 shadow rounded">
+          <div class="card-header linearbackground text-white" style="background-color: #81fbae">
+            <span class="px-2" style="font-weight: 600;">My Profile</span>
+          </div>
+          <div class="card-body px-4">
+            <p class="lead">Username: {{ username }}</strong></p>
+            <p class="lead">Full name: {{ user.get_full_name }}</p>
+            <p class="lead">Email address: {{ email }}</p>
+            <p class="lead">Last login: {{ last_login }}</p>
+            <p class="lead">Location: {{ user.profile.location }}</p>
+            <p class="lead">Birth Date: {{ user.profile.birth_date }}</p>
+            <p class="lead">{{ is_superuser }}</p>
+            <p class="lead">Bio: {{ user.profile.bio }}</p>
 
-  <h1 class="text-center py-3">My Profile</h1>
+            <a href="{% url 'update_profile' %}" class="btn btn-sm btn-danger float-end mx-3 mt-3">Update profile</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <h4>Name: <span class="lead">{{ username }}</span></h4>
-  <h4>Last login: <span class="lead">{{ last_login }}</span></h4>
-  <h4>Is superuser: <span class="lead">{{ is_superuser }}</span></h4>
-  <h4>Email address: <span class="lead">{{ email }}</span></h4>
-  <h4>Last login: <span class="lead">{{ first_name }} {{   last_name }}</span></h4>
-
-  <h2>{{ user.get_full_name }}</h2>
-  <ul>
-    <li>Username: {{ user.username }}</li>
-    <li>Location: {{ user.profile.location }}</li>
-    <li>Birth Date: {{ user.profile.birth_date }}</li>
-  </ul>
-  <h4>Bio:</h4>
-  <p>{{ user.profile.bio }}</p>
-  <a href="{% url 'update_profile' %}" class="btn btn-sm btn-danger">Update profile</a>
-
-  
-</main>
 {% endblock %}

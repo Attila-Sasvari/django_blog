@@ -9,7 +9,7 @@
     <br>
 
     {% if user.is_authenticated %}
-    <div class="profile-header-container text-center mb-3">
+    <div class="profile-header-container text-center w-75 mb-3">
         <div class="profile-header-img">
             <img class="img-circle"
                 src="https://lh3.googleusercontent.com/-60pK_2LG9e4/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucnR3jXZZdznK-xkGPgJJQ_uW2K9Gg/photo.jpg?sz=120" />
@@ -18,33 +18,6 @@
             </div>
         </div>
     </div>
-    {% endif %}
-
-    <hr class="text-white w-100 my-1 text-center">
-
-    <ul class="nav flex-column my-4" id="#navbar_ul">
-        <li class="nav-item w-100">
-            <a href="{% url 'blog' %}"
-            class="small nav-link d-flex align-items-center justify-content w-100 text-white">
-                <i class="bi bi-columns small text-white me-4"></i>
-                <span class="small me-5">Blog</span>
-            </a>
-        </li>
-        <li class="nav-item w-100">
-            <a href="#" class="small nav-link d-flex align-items-center justify-content w-100 text-white">
-                <i class="bi bi-binoculars small text-white me-4"></i>
-                <span class="small me-5">Dashboard</span>
-            </a>
-        </li>
-        <li class="nav-item w-100">
-            <a href="#" class="small nav-link d-flex align-items-center justify-content w-100 text-white">
-                <i class="bi bi-columns small text-white me-4"></i>
-                <span class="small me-5">Authors</span>
-            </a>
-        </li>
-    </ul>
-
-    <hr class="text-white w-100 my-1 text-center">
 
     <ul class="nav flex-column my-4" id="#navbar_ul">
         <li class="nav-item w-100">
@@ -68,22 +41,42 @@
                 <span class="small me-5">My Drafts</span>
             </a>
         </li>
-        <li class="nav-item w-100">
-            <a href="{% url 'dashboard' %}"
-            class="small nav-link d-flex align-items-center justify-content w-100 text-white">
-                <i class="bi bi-binoculars small text-white me-4"></i>
-                <span class="small me-5">My Stats</span>
-            </a>
-        </li>
 
     </ul>
-
-
     <hr class="text-white w-100 my-2 text-center">
+    {% endif %}
+
 
     <ul class="nav flex-column my-4" id="#navbar_ul">
         <li class="nav-item w-100">
-            <a href="#" class="small nav-link d-flex align-items-center justify-content w-100 text-white">
+            <a href="{% url 'blog' %}"
+            class="small nav-link d-flex align-items-center justify-content w-100 text-white">
+                <i class="bi bi-columns small text-white me-4"></i>
+                <span class="small me-5">Blog</span>
+            </a>
+        </li>
+        <li class="nav-item w-100">
+            <a href="{% url 'dashboard' %}" class="small nav-link d-flex align-items-center justify-content w-100 text-white">
+                <i class="bi bi-binoculars small text-white me-4"></i>
+                <span class="small me-5">Dashboard</span>
+            </a>
+        </li>
+        <li class="nav-item w-100">
+            <a href="{% url 'authors' %}" class="small nav-link d-flex align-items-center justify-content w-100 text-white">
+                <i class="bi bi-columns small text-white me-4"></i>
+                <span class="small me-5">Authors</span>
+            </a>
+        </li>
+    </ul>
+
+    <hr class="text-white w-100 my-1 text-center">
+    {% if user.is_authenticated %}
+    
+    {% endif %}
+
+    <ul class="nav flex-column my-4" id="#navbar_ul">
+        <li class="nav-item w-100">
+            <a href="{% url 'about' %}" class="small nav-link d-flex align-items-center justify-content w-100 text-white">
                 <i class="bi bi-file-code small text-white me-4"></i>
                 <span class="small me-5">About</span>
             </a>

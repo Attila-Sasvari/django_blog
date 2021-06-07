@@ -15,10 +15,14 @@
   <title>Django App | {% block title %}{% endblock %}</title>
 </head>
 
-<body class="container-fluid d-flex flex-fill" style="background-color: #f1f3f3">
+<body class="container-fluid d-flex flex-fill" style="background-color: #f1f3f3; min-height: 100vh;">
   <div class="row flex-fill">
     {% include 'partials/_sidebar.html' %}
-    {% block content %} {% endblock %}
+    <main class="col-lg-10 col-md-2 col-sm-9 px-5 d-flex flex-column text-underline" style="background-color: #fbfcfc">
+      <h1 class="text-center py-3" style="color: #539b6d"><u>Web Dev Blog</u></h1>
+      <br>
+      {% block content %} {% endblock %}
+    </main>
   </div>
 
   

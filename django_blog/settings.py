@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'accounts',
     'api',
     'dashboard',
+    'fileupload',
 ]
 
 MIDDLEWARE = [
@@ -122,7 +123,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-YEAR_CHOICES = [1986, 1987, 1988, 1989, 1990, 1991, 1992, 1993]
+YEAR_CHOICES = list(range(1940, 2005))
 DATE_INPUT_FORMATS = ['%Y-%m-%d', '%m/%d/%Y', '%m/%d/%y']
 
 

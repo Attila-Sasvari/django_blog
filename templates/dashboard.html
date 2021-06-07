@@ -4,33 +4,27 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block content %}
-<main class="col-lg-10 col-md-2 col-sm-9 px-5 d-flex flex-column text-underline" style="background-color: #fbfcfc">
-
-  <h1 class="text-center py-3">Dashboard</h1>
-  <h3>Articles count: {{ articles_count }}</h3>
-  <h3>Authors count: {{ authors_count.author__count }}</h3>
-  <h3>Oldest article: {{ oldest_article.created_at__min }}</h3>
-  <h3>Read number stats:</h3>
-  <ul>
-    <li>AVG {{ read_number_stats.read_number__avg }}</li>
-    <li>MAX {{ read_number_stats.read_number__max }}</li>
-    <li>MIN {{ read_number_stats.read_number__min }}</li>
-    <li>SUM {{ read_number_stats.read_number__sum }}</li>
-  </ul>
-  <h3>Number of articles written per day:</h3>
-  <ul>
-    {% for day in articles_by_day %}
-    <li>{{ day.created_day }}: {{ day.article_count }}</li>
-    {% endfor %}
-  </ul>
-  <h3>The Top 3 most viewed articles:</h3>
-  <ul>
-    {% for day in highest_read %}
-    <li><span class="lead">{{ day.title }}</span> <span class="badge badge-dark text-dark">{{ day.blogcounts.read_number }}</span> </li>
-    {% endfor %}
-  </ul>
-
-
-  
-</main>
+<h1 class="text-center py-3">Dashboard</h1>
+<h3>Articles count: {{ articles_count }}</h3>
+<h3>Authors count: {{ authors_count.author__count }}</h3>
+<h3>Oldest article: {{ oldest_article.created_at__min }}</h3>
+<h3>Read number stats:</h3>
+<ul>
+  <li>AVG {{ read_number_stats.read_number__avg }}</li>
+  <li>MAX {{ read_number_stats.read_number__max }}</li>
+  <li>MIN {{ read_number_stats.read_number__min }}</li>
+  <li>SUM {{ read_number_stats.read_number__sum }}</li>
+</ul>
+<h3>Number of articles written per day:</h3>
+<ul>
+  {% for day in articles_by_day %}
+  <li>{{ day.created_day }}: {{ day.article_count }}</li>
+  {% endfor %}
+</ul>
+<h3>The Top 3 most viewed articles:</h3>
+<ul>
+  {% for day in highest_read %}
+  <li><span class="lead">{{ day.title }}</span> <span class="badge badge-dark text-dark">{{ day.blogcounts.read_number }}</span> </li>
+  {% endfor %}
+</ul>
 {% endblock %}

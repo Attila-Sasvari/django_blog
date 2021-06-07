@@ -12,5 +12,9 @@ urlpatterns = [
     path('dashboard/', include('dashboard.urls')),
     path('accounts/', include('accounts.urls')),
     path('api/v1/', include('api.urls')),
-    path("graphql", csrf_exempt(GraphQLView.as_view(graphiql=True)))
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path("graphql/", csrf_exempt(GraphQLView.as_view(graphiql=True))),
+    path("file-upload/", include('upload.urls')),
+]
+
+if bool(settings.DEBUG):
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

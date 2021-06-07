@@ -13,40 +13,29 @@
 
 {% block content %}
 
-<main class="col-lg-10 col-md-2 col-sm-9 px-5 d-flex flex-column text-underline" style="background-color: #fbfcfc">
-    <h1 class="text-center py-3" style="color: #539b6d"><u>Web Dev Blog</u></h1>
+<div class="card mt-3 mb-4 shadow rounded">
 
-    <br>
-
-    <div class="card mt-3 mb-4 shadow rounded">
-
-        <div class="card-body p-5">
-            <h2>{{ title }}</h2>
-            <p class="card-text mb-0">
-                <small class="text-muted">Written by {{ author }}, Last updated {{ updated_at | naturalday }} ago.
-                </small></p>
-            <p class="card-text mb-0 mt-2 text-muted small">Tags: <small class="text-muted small">#redhat
-                    #certification</small></p>
-            <br>
-            {{ entry | safe }}
-
-            <div class="d-flex flex-rowfloat-end align-items-center">
-                <form method="post" name="add_star" action="{% url 'add_star' id %}">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-sm btn-warning">Upvote</button>
-                </form>
-    
-                <a href="{% url 'edit_article' id %}" role=button class="btn btn-sm btn-danger mx-3">Edit article</a>
-            </div>
-
-            
-
-        </div>
-        <div class="card-header linearbackground text-white" style="background-color: #81fbae">
-            <small class="float-end px-2" style="font-weight: 600;">Read <span class="badge bg-secondary ms-2 me-4">{{ read_number }}</span></small>
-            <small class="float-end px-2" style="font-weight: 600;">Upvoted <span class="badge bg-secondary ms-2">{{ stars_number }}</span></small>
+    <div class="card-body p-5">
+        <h2>{{ title }}</h2>
+        <p class="card-text mb-0">
+            <small class="text-muted">Written by {{ author }}, Last updated {{ updated_at | naturalday }} ago.
+            </small>
+        </p>
+        <p class="card-text mb-0 mt-2 text-muted small">Tags: <small class="text-muted small">#redhat #certification</small></p>
+        <br>
+        {{ entry | safe }}
+        <div class="d-flex flex-rowfloat-end align-items-center">
+            <form method="post" name="add_star" action="{% url 'add_star' id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-sm btn-warning">Upvote</button>
+            </form>
+            <a href="{% url 'edit_article' id %}" role=button class="btn btn-sm btn-danger mx-3">Edit article</a>
         </div>
     </div>
-</main>
+    <div class="card-header linearbackground text-white" style="background-color: #81fbae">
+        <small class="float-end px-2" style="font-weight: 600;">Read <span class="badge bg-secondary ms-2 me-4">{{ read_number }}</span></small>
+        <small class="float-end px-2" style="font-weight: 600;">Upvoted <span class="badge bg-secondary ms-2">{{ stars_number }}</span></small>
+    </div>
+</div>
 
 {% endblock %}

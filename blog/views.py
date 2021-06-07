@@ -24,6 +24,9 @@ def blog(request):
 
     return render(request, 'blog/blog.html', context)
 
+def about(request):
+    return render(request, 'about.html')
+
 
 @login_required
 def my_articles(request):

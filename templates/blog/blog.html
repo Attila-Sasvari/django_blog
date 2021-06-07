@@ -11,79 +11,73 @@
 {% endblock %}
 
 {% block content %}
-<main class="col-lg-10 col-md-2 col-sm-9 px-5 d-flex flex-column text-underline" style="background-color: #fbfcfc">
 
-    <h1 class="text-center py-3" style="color: #539b6d"><u>Web Dev Blog</u></h1>
-    <br>
+<form action="{% url 'search_blog' %}" class="my-4">
+    <p class="text-muted ps-3 pb-0">Search in the blog articles.</p>
+    <div class="d-flex flex-row justify-content-around align-items-center">
+        <div class="col-md-3">
+            <input id="content" type="text" name="content" class="form-control" placeholder="Content"
+                value="{{ values.content }}">
+        </div>
 
-    <div class="d-flex flex-column mb-3">
-        <div class="row text-center">
-            <div class="col small me-0 pe-0">Order by popularity<i class="bi bi-arrow-down small ps-2"></i></div>
-            <div class="col small me-0 pe-0">Order by last update<i class="bi bi-arrow-down small ps-2"></i></div>
-            <div class="col small me-0 pe-0">Order by upvotes<i class="bi bi-arrow-down small ps-2"></i></div>
+        <div class="col-md-3">
+            <input id="title" type="text" name="title" class="form-control" placeholder="Title"
+                value="{{ values.title }}">
+        </div>
+
+        <div class="col-md-3">
+            <select id="category" name="category" class="form-control">
+                <option selected="true" disabled="disabled">Category (All)</option>
+                {% for key,value in category_list.items %}
+                <option value="{{ key }}">{{ value }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-success btn-sm px-3" type="submit">Search</button>
         </div>
     </div>
+</form>
 
-    <form action="{% url 'search_blog' %}">
-        <div class="form-row">
-            <div class="col-md-4 mb-3">
-                <label class="sr-only">Content</label>
-                <input type="text" name="content" class="form-control" placeholder="Content"
-                    value="{{ values.content }}">
-            </div>
-
-            <div class="col-md-4 mb-3">
-                <label class="sr-only">Title</label>
-                <input type="text" name="title" class="form-control" placeholder="Title" value="{{ values.title }}">
-            </div>
-
-            <div class="col-md-4 mb-3">
-                <label class="sr-only">Category</label>
-                <select name="category" class="form-control">
-                    <option selected="true" disabled="disabled">Category (All)</option>
-                    {% for key,value in category_list.items %}
-                    <option value="{{ key }}">{{ value }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-        </div>
-        <button class="btn btn-secondary btn-block mt-4" type="submit">Submit form</button>
-    </form>
-
-    {% for a in articles %}
-    <div class="card mt-3 mb-4 shadow rounded">
-        <div class="card-header linearbackground text-white" style="background-color: #81fbae">
-            <small class="float-end px-2" style="font-weight: 600;">Read <span
-                    class="badge bg-secondary ms-2 me-4">{{ a.blogcounts.read_number }}</span></small>
-            <small class="float-end px-2" style="font-weight: 600;">Upvoted <span
-                    class="badge bg-secondary ms-2">{{ a.blogcounts.stars_number }}</span></small>
-            <small class="float-end px-4" style="font-weight: 600;">#redhat #certification</small>
-            <span class="px-2" style="font-weight: 600;">Featured article</span>
-        </div>
-
-        
-        <div class="card-body px-4">
-            <h2>{{ a.title }}</h2>
-            <p class="card-text mb-0"><small class="text-muted">Written by {{ a.author}}, Last updated {{ a.updated_at | naturalday }} ago</small></p>
-            <br>
-
-            <div class="row">
-                <div class="col-md-3">
-                    <img src="https://media.istockphoto.com/photos/interior-design-in-modern-living-room-with-wood-floor-and-white-wall-picture-id1144268258"
-                        class="img-fluid" alt="...">
-                </div>
-                <div class="col-md-9">
-                    <p class="card-text text-justify">{{ a.lead }}</p>
-                    {{ a.content | safe | slice:":200"}}
-                    <a href="{% url 'article' a.id %}" class="btn btn-outline-dark btn-sm px-3 mb-2 float-end">Read the
-                        article</a>
-                </div>
-            </div>
-
-
-        </div>
+<div class="d-flex flex-column mb-3">
+    <p class="text-muted ps-3 pb-0">Order the blog articles.</p>
+    <div class="row ps-3">
+        <div class="col small me-0 pe-0">By popularity<i class="bi bi-arrow-down small ps-2"></i></div>
+        <div class="col small me-0 pe-0">By last update<i class="bi bi-arrow-down small ps-2"></i></div>
+        <div class="col small me-0 pe-0">By upvotes<i class="bi bi-arrow-down small ps-2"></i></div>
     </div>
-    {% endfor %}
-        
-</main>
+</div>
+
+{% for a in articles %}
+<div class="card mt-3 mb-4 shadow rounded">
+    <div class="card-header linearbackground text-white" style="background-color: #81fbae">
+        <small class="float-end px-2" style="font-weight: 600;">Read <span class="badge bg-secondary ms-2 me-4">{{ a.blogcounts.read_number }}</span></small>
+        <small class="float-end px-2" style="font-weight: 600;">Upvoted <span class="badge bg-secondary ms-2">{{ a.blogcounts.stars_number }}</span></small>
+        <small class="float-end px-4" style="font-weight: 600;">#redhat #certification</small>
+        <span class="px-2" style="font-weight: 600;">Featured article</span>
+    </div>
+
+
+    <div class="card-body px-4">
+        <h2>{{ a.title }}</h2>
+        <p class="card-text mb-0"><small class="text-muted">Written by {{ a.author}}, Last updated {{ a.updated_at | naturalday }} ago</small></p>
+        <br>
+
+        <div class="row">
+            <div class="col-md-3">
+                <img src="https://media.istockphoto.com/photos/interior-design-in-modern-living-room-with-wood-floor-and-white-wall-picture-id1144268258"
+                    class="img-fluid" alt="...">
+            </div>
+            <div class="col-md-9">
+                <p class="card-text text-justify">{{ a.lead }}</p>
+                {{ a.content | safe | slice:":200"}}
+                <a href="{% url 'article' a.id %}" class="btn btn-outline-dark btn-sm px-3 mb-2 float-end">Read the article</a>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+{% endfor %}
+
 {% endblock %}
