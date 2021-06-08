@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class FileUploadConfig(AppConfig):
+class UploadConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'fileupload'
+    name = 'upload'

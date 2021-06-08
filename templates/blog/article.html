@@ -15,7 +15,7 @@
 
 <div class="card mt-3 mb-4 shadow rounded">
 
-    <div class="card-body p-5">
+    <div class="card-body p-5" id="markdown-content">
         <h2>{{ title }}</h2>
         <p class="card-text mb-0">
             <small class="text-muted">Written by {{ author }}, Last updated {{ updated_at | naturalday }} ago.
@@ -23,6 +23,7 @@
         </p>
         <p class="card-text mb-0 mt-2 text-muted small">Tags: <small class="text-muted small">#redhat #certification</small></p>
         <br>
+        <img src="{{ cover_img }}" class="img-fluid w-75 align-items-center d-flex mx-auto" alt="...">
         {{ entry | safe }}
         <div class="d-flex flex-rowfloat-end align-items-center">
             <form method="post" name="add_star" action="{% url 'add_star' id %}">

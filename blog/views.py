@@ -65,8 +65,6 @@ def article(request, blog_id):
     article.blogcounts.read_number += 1
     article.blogcounts.save(update_fields=['read_number'])
 
-    print(dir(article))
-
     context = {
         "id": article.id,
         "entry": md.convert(article.content),
@@ -77,7 +75,8 @@ def article(request, blog_id):
         "author": article.author,
         "updated_at": article.updated_at,
         "read_number": article.blogcounts.read_number,
-        "stars_number": article.blogcounts.stars_number
+        "stars_number": article.blogcounts.stars_number,
+        "cover_img": article.cover_img.url
     }
 
     return render(request, 'blog/article.html', context)
@@ -100,7 +99,8 @@ def add_star(request, blog_id):
             "author": article.author,
             "updated_at": article.updated_at,
             "read_number": article.blogcounts.read_number,
-            "stars_number": article.blogcounts.stars_number
+            "stars_number": article.blogcounts.stars_number,
+            "cover_img": article.cover_img,
         }
 
         return render(request, 'blog/article.html', context)
@@ -137,8 +137,6 @@ def search_blog(request):
         title = request.GET['title']
         if title:
             articles_list = articles.filter(title__icontains=title)
-
-    print(articles_list)
 
     paginator = Paginator(articles_list, 5)
     page = request.GET.get('page')

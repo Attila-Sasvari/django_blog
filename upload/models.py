@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class FileUpload(models.Model):
+class Upload(models.Model):
     image_file = models.ImageField(max_length=300, unique=True)
 
     def __str__(self):

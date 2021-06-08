@@ -6,10 +6,6 @@
 
 {% block title %}Blog {% endblock %}
 
-{% block css %}
-<link rel="stylesheet" href="{% static 'css/markdown.css' %}">
-{% endblock %}
-
 {% block content %}
 
 <form action="{% url 'search_blog' %}" class="my-4">
@@ -65,12 +61,11 @@
 
         <div class="row">
             <div class="col-md-3">
-                <img src="https://media.istockphoto.com/photos/interior-design-in-modern-living-room-with-wood-floor-and-white-wall-picture-id1144268258"
+                <img src="{{ a.img_url }}"
                     class="img-fluid" alt="...">
             </div>
             <div class="col-md-9">
                 <p class="card-text text-justify">{{ a.lead }}</p>
-                {{ a.content | safe | slice:":200"}}
                 <a href="{% url 'article' a.id %}" class="btn btn-outline-dark btn-sm px-3 mb-2 float-end">Read the article</a>
             </div>
         </div>
