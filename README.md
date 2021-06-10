@@ -1,124 +1,175 @@
 # Django Blog project
 
-This project was made to have a functioning Django app with some of the most basic (and some unnecessary but nice) features. The most important goal was to have a boileplate code which can be used later on for new apps in order to get things done quickly.
+## Goals
+
+* A functioning app made with Django framework, connecting to an SQL database with ORM.
+* A functioning blog with the most important basic features, and some unnecessary but nice ones.
+* An app that uses several important features of Bootstrap v5.
+* A boilerplate whose parts can be used in future Django apps to get started quickly.
+* An app that can be used with Docker, docker-compose and perhaps with Kubernetes.
+
 
 ## Features
 
 - Django 3.0+
 - PostgreSQL database support with psycopg2.
 - GraphQL support with graphene-django.
-- Docker and Docker compose support.
+- Docker and Docker Compose support, separate environment for Dev and Prod instances, and linting.
 - Nginx support.
-- Custom User profiles.
-- Blog posts can be written in Markdown.
-- Blog posts read number and possibility to upvote.
+- Authentication and user profiles with custom fields.
+- Blog posts can be written in Markdown and displayed as HTML.
+- Count blog posts read number and possibility to upvote posts.
+- Possibility to upload images.
+- Collect statistics with a REST API (e.g. daily).
+- Customized Django Admin interface.
+
+# Installation and setup
+
+## How to setup virtual environment
+
+```bash
+$ mkdir ~/django && cd ~/django
+
+# install virtual env
+$ pip3 install virtualenv
+
+# create new virtual env
+$ virtualenv django_app
+
+# start virtualenv
+$ source django_app/bin/activate
+```
+
+## How to get code from GitHub
+
+```bash
+$ cd ~/django
+$ git clone https://github.com/Attila-Sasvari/django_blog.git
+$ cd django_blog
+```
 
 ## How to install without Docker
 
 ```bash
-$ django-admin.py startproject \
-  --template=https://github.com/jpadilla/django-project-template/archive/master.zip \
-  --name=Procfile \
-  --extension=py,md,env \
-  project_name
-$ mv example.env .env
-$ pipenv install --dev
+$ cd ~/django/django_blog
+
+# activate virtual env
+$ source django_app/bin/activate
+
+# install dependencies
+$ pip3 install -r requirements.txt
+
+# one time actions to setup database and static files
+$ python manage.py makemigrations
+$ python manage.py migrate --noinput
+$ python manage.py collectstatic --no-input --clear
+
+# create super user account
+$ python manage.py createsuperuser
+
+# run the app
+$ python manage.py runserver
 ```
 
-## How to install with Docker and Docker Compose
+## How to install Dev environemtn with Docker and Docker Compose
 
 ```bash
-$ django-admin.py startproject \
-  --template=https://github.com/jpadilla/django-project-template/archive/master.zip \
-  --name=Procfile \
-  --extension=py,md,env \
-  project_name
-$ mv example.env .env
-$ pipenv install --dev
+$ cd ~/django/django_blog
+$ docker-compose -f docker-compose.yml up -d --build
+
+# one time actions to setup database and static files
+$ docker-compose -f docker-compose.yml exec web python manage.py makemigrations
+$ docker-compose -f docker-compose.yml exec web python manage.py migrate --noinput
+$ docker-compose -f docker-compose.yml exec web python manage.py collectstatic --no-input --clear
 ```
+
+Note: For production environment, use the same commands, but instead of `docker-compose.yml`, use `docker-compose.prod.yml`.
+
+
+## How to connect to the database
+
+```bash
+$ docker-compose exec db psql --username=hello_django --dbname=hello_django_dev
+
+```
+
+## How to check logs when run with Docker Compose
+
+```bash
+$ docker-compose -f docker-compose.yml logs
+
+# logs of the web container
+$ docker-compose logs django_blog_web_1
+
+# logs of the db container
+$ docker-compose logs django_blog_db_1
+```
+
+This setup was inspired by [this article](https://testdriven.io/blog/dockerizing-django-with-postgres-gunicorn-and-nginx/).
 
 ## Environment variables
 
-These are common between environments. The `ENVIRONMENT` variable loads the correct settings, possible values are: `DEVELOPMENT`, `STAGING`, `PRODUCTION`.
+If Docker is used, then `.env.dev` is used for Dev environment, `.env.prod` along with `.env.prod.db` are used for Prod environment.
 
-```
-ENVIRONMENT='DEVELOPMENT'
-DJANGO_SECRET_KEY='dont-tell-eve'
-DJANGO_DEBUG='yes'
-```
+If Docker is not used, then the default SQLite database is created (instead of PostgreSQL) with default values.
 
-These settings(and their default values) are only used on staging and production environments.
-
-```
-DJANGO_SESSION_COOKIE_SECURE='yes'
-DJANGO_SECURE_BROWSER_XSS_FILTER='yes'
-DJANGO_SECURE_CONTENT_TYPE_NOSNIFF='yes'
-DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS='yes'
-DJANGO_SECURE_HSTS_SECONDS=31536000
-DJANGO_SECURE_REDIRECT_EXEMPT=''
-DJANGO_SECURE_SSL_HOST=''
-DJANGO_SECURE_SSL_REDIRECT='yes'
-DJANGO_SECURE_PROXY_SSL_HEADER='HTTP_X_FORWARDED_PROTO,https'
-```
 
 ## Deployment
 
-## TODO
+So far no deployment has been done on any of the major cloud providers, so here is a list of articles talking about different deployment workflows.
 
-### Design
+- https://testdriven.io/blog/production-django-deployments-on-heroku/
+- https://testdriven.io/blog/django-digitalocean-app-platform/
+- https://testdriven.io/blog/deploying-django-to-ecs-with-terraform/
+- https://testdriven.io/blog/django-docker-https-aws/
+- https://testdriven.io/blog/deploying-django-to-ec2-with-docker-and-gitlab/
+- https://testdriven.io/blog/deploying-django-to-digitalocean-with-docker-and-github-actions/
 
-* Nicer design to the pages
-* Possibly a Vue frontend next to the existing (low prio)
-* Custom Admin page (low prio)
 
-### APIs
+# TODO
 
-* Additional GraphQL APIs
+Below is a big list of potential features to implement in the future.
+
+## Design updates
+
+* Vue frontend that gets data from Django app through GraphQL or REST API.
+* Further customize the admin page.
+
+## APIs
+
+* Additional GraphQL APIs.
 * Some meaningful REST APIs: https://testdriven.io/blog/drf-serializers/
 
-### Database
+## Database
 
 * Remote DB (PostgreSQL) integration
-* Redis integration
+* Redis integration to cache data.
 
-### Containerize
-
-* Use Docker and Docker Compose: https://testdriven.io/blog/dockerizing-django-with-postgres-gunicorn-and-nginx/
-
-### Async
+## Async
 
 * Async views: https://testdriven.io/blog/django-async-views/
 
-### Deployment
-
-* Where to host and how to deploy:
-    - https://testdriven.io/blog/production-django-deployments-on-heroku/
-    - https://testdriven.io/blog/django-digitalocean-app-platform/
-    - https://testdriven.io/blog/deploying-django-to-ecs-with-terraform/
-    - https://testdriven.io/blog/django-docker-https-aws/
-    - https://testdriven.io/blog/deploying-django-to-ec2-with-docker-and-gitlab/
-    - https://testdriven.io/blog/deploying-django-to-digitalocean-with-docker-and-github-actions/
-* How to make backups
-
-### Authentication
+## Authentication
 
 * Social media login: https://testdriven.io/blog/django-social-auth/
 * Extend user profile: https://testdriven.io/blog/django-custom-user-model/
 
-### RSS
+## RSS
 
 * https://www.tutorialspoint.com/django/django_rss.htm
 
-### Periodic tasks
+
+## Periodic tasks
 
 * Celery:
     - https://testdriven.io/blog/celery-database-transactions/
     - https://testdriven.io/blog/django-celery-periodic-tasks/
     - https://testdriven.io/blog/django-and-celery/
 
-### Additional functionalities
 
-* Sending emails (High Prio)
+## Additional functionalities
+
+* Sending emails, for example when user is registered.
 * Cookies: https://www.tutorialspoint.com/django/django_cookies_handling.htm (High Prio)
 * Caching:
     - https://www.tutorialspoint.com/django/django_caching.htm (High Prio)
@@ -126,10 +177,11 @@ DJANGO_SECURE_PROXY_SSL_HEADER='HTTP_X_FORWARDED_PROTO,https'
 * Stripe:
     - https://testdriven.io/blog/django-stripe-tutorial/
     - https://testdriven.io/blog/django-stripe-subscriptions/
-* Paging or Load more (High Prio)
-* Charts: https://testdriven.io/blog/django-charts/
+* Paging or Load more
+* Charts for dashboard: https://testdriven.io/blog/django-charts/
 
-### Documentation
+
+## Documentation
 
 * https://testdriven.io/blog/documenting-python/
 

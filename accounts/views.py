@@ -30,7 +30,6 @@ def fixme(request):
     for user in users:
         obj, created = Profile.objects.get_or_create(user=user)
         print(user.username, ' : ', created)
-    print("all done")
     return HttpResponse("It's done.")
 
 def authors(request):
