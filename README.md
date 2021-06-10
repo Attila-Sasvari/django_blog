@@ -113,6 +113,21 @@ If Docker is used, then `.env.dev` is used for Dev environment, `.env.prod` alon
 
 If Docker is not used, then the default SQLite database is created (instead of PostgreSQL) with default values.
 
+### Removing resources with Docker
+
+```bash
+# stop all running container
+docker stop $(docker ps -a -q)
+
+# remove all containers
+docker rm -f $(docker ps -a -q)
+
+# remove image
+docker rmi <container_name_or_id>
+
+# remove everything
+docker system prune -a
+```
 
 ### Deployment
 
