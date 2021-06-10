@@ -23,9 +23,9 @@
 - Collect statistics with a REST API (e.g. daily).
 - Customized Django Admin interface.
 
-# Installation and setup
+## Installation and setup
 
-## How to setup virtual environment
+### How to setup virtual environment
 
 ```bash
 $ mkdir ~/django && cd ~/django
@@ -40,7 +40,7 @@ $ virtualenv django_app
 $ source django_app/bin/activate
 ```
 
-## How to get code from GitHub
+### How to get code from GitHub
 
 ```bash
 $ cd ~/django
@@ -48,7 +48,7 @@ $ git clone https://github.com/Attila-Sasvari/django_blog.git
 $ cd django_blog
 ```
 
-## How to install without Docker
+### How to install without Docker
 
 ```bash
 $ cd ~/django/django_blog
@@ -71,7 +71,7 @@ $ python manage.py createsuperuser
 $ python manage.py runserver
 ```
 
-## How to install Dev environemtn with Docker and Docker Compose
+### How to install Dev environemtn with Docker and Docker Compose
 
 ```bash
 $ cd ~/django/django_blog
@@ -86,14 +86,14 @@ $ docker-compose -f docker-compose.yml exec web python manage.py collectstatic -
 Note: For production environment, use the same commands, but instead of `docker-compose.yml`, use `docker-compose.prod.yml`.
 
 
-## How to connect to the database
+### How to connect to the database
 
 ```bash
 $ docker-compose exec db psql --username=hello_django --dbname=hello_django_dev
 
 ```
 
-## How to check logs when run with Docker Compose
+### How to check logs when run with Docker Compose
 
 ```bash
 $ docker-compose -f docker-compose.yml logs
@@ -107,14 +107,14 @@ $ docker-compose logs django_blog_db_1
 
 This setup was inspired by [this article](https://testdriven.io/blog/dockerizing-django-with-postgres-gunicorn-and-nginx/).
 
-## Environment variables
+### Environment variables
 
 If Docker is used, then `.env.dev` is used for Dev environment, `.env.prod` along with `.env.prod.db` are used for Prod environment.
 
 If Docker is not used, then the default SQLite database is created (instead of PostgreSQL) with default values.
 
 
-## Deployment
+### Deployment
 
 So far no deployment has been done on any of the major cloud providers, so here is a list of articles talking about different deployment workflows.
 
@@ -126,40 +126,40 @@ So far no deployment has been done on any of the major cloud providers, so here 
 - https://testdriven.io/blog/deploying-django-to-digitalocean-with-docker-and-github-actions/
 
 
-# TODO
+## TODO
 
 Below is a big list of potential features to implement in the future.
 
-## Design updates
+### Design updates
 
 * Vue frontend that gets data from Django app through GraphQL or REST API.
 * Further customize the admin page.
 
-## APIs
+### APIs
 
 * Additional GraphQL APIs.
 * Some meaningful REST APIs: https://testdriven.io/blog/drf-serializers/
 
-## Database
+### Database
 
 * Remote DB (PostgreSQL) integration
 * Redis integration to cache data.
 
-## Async
+### Async
 
 * Async views: https://testdriven.io/blog/django-async-views/
 
-## Authentication
+### Authentication
 
 * Social media login: https://testdriven.io/blog/django-social-auth/
 * Extend user profile: https://testdriven.io/blog/django-custom-user-model/
 
-## RSS
+### RSS
 
 * https://www.tutorialspoint.com/django/django_rss.htm
 
 
-## Periodic tasks
+### Periodic tasks
 
 * Celery:
     - https://testdriven.io/blog/celery-database-transactions/
@@ -167,9 +167,9 @@ Below is a big list of potential features to implement in the future.
     - https://testdriven.io/blog/django-and-celery/
 
 
-## Additional functionalities
+### Additional functionalities
 
-* Sending emails, for example when user is registered.
+* Sending emails, for example when user is registered or when password reset.
 * Cookies: https://www.tutorialspoint.com/django/django_cookies_handling.htm (High Prio)
 * Caching:
     - https://www.tutorialspoint.com/django/django_caching.htm (High Prio)
@@ -181,12 +181,12 @@ Below is a big list of potential features to implement in the future.
 * Charts for dashboard: https://testdriven.io/blog/django-charts/
 
 
-## Documentation
+### Documentation
 
 * https://testdriven.io/blog/documenting-python/
 
 
-# License
+## License
 
 The MIT License (MIT)
 
