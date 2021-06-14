@@ -13,7 +13,7 @@ md = markdown.Markdown()
 
 def blog(request):
     articles = Blog.objects.order_by('-updated_at').filter(is_published=True)
-    paginator = Paginator(articles, 5)
+    paginator = Paginator(articles, 2)
     page = request.GET.get('page')
     paged_articles = paginator.get_page(page)
 

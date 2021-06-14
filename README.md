@@ -192,8 +192,10 @@ Below is a big list of potential features to implement in the future.
 * Stripe:
     - https://testdriven.io/blog/django-stripe-tutorial/
     - https://testdriven.io/blog/django-stripe-subscriptions/
-* Paging or Load more
 * Charts for dashboard: https://testdriven.io/blog/django-charts/
+* Use Makefile: https://docker-handbook.farhan.dev/containerizing-a-multi-container-javascript-application#writing-management-scripts
+* Enhance Docker Compose files: https://docker-handbook.farhan.dev/composing-projects-using-docker-compose
+* Implement basic Kubernetes setup: https://www.freecodecamp.org/news/the-kubernetes-handbook/
 
 
 ### Documentation
