@@ -8,16 +8,17 @@ class Upload(models.Model):
     def __str__(self):
         return self.image_file
     
-    def save(self):
-        super().save()
-
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        print("Saving into media folder.")
+        
         img = Image.open(self.image_file.path)
-
         width, height = img.size
 
-        if height > 400 or width > 400:
+        if height > 500 or width > 500:
             ratio = width / height
             new_height = 300
             new_width = int(ratio * new_height)
-            img.resize((new_width, new_height))
-            img.save(self.image.path)
+            img.thumbnail((new_width, new_height), Image.ANTIALIAS)
+            img.save(self.image.path, format='JPEG', quality=60)
+

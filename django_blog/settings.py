@@ -158,12 +158,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 DEFUALT_COVER_IMG = 'default_cover_img.jpg'
 
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = str(BASE_DIR.joinpath('sent_emails'))
+
 GRAPHENE = {
   "SCHEMA": "blog.schema.schema",
 }
 
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = ("http://localhost:8080",)
+
+LOGIN_REDIRECT_URL = '/blog'
 
 """ try:
     from .local_settings import *

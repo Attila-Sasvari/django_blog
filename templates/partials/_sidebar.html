@@ -83,15 +83,11 @@
         </li>
         {% if user.is_authenticated %}
         <li class="nav-item w-100">
-            <a href="javascript:{document.getElementById('logout').submit()}"
+            <a href="{% url 'logout' %}"
             class="small nav-link d-flex align-items-center justify-content w-100 text-white">
                 <i class="bi bi-emoji-sunglasses small text-white me-4"></i>
                 <span class="small me-5">Logout</span>
             </a>
-            <form action="{% url 'logout' %}" method="POST" id="logout">
-                {% csrf_token %}
-                <input type="hidden">
-            </form>
         </li>
         {% else %}
         <li class="nav-item w-100">

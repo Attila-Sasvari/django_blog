@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block title %}Account Login {% endblock %}
 
@@ -30,6 +31,8 @@
 
               <input type="submit" value="Login" class="btn btn-success btn-sm mx-3 mt-3 float-end">
             </form>
+            <p>{% trans "Forgot password" %}? <a href="{% url 'password_reset' %}">{% trans "Reset it" %}</a>!</p>
+            <p>{% trans "Not member" %}? <a href="{% url 'register' %}">{% trans "Register" %}</a>!</p>
           </div>
         </div>
       </div>

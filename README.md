@@ -157,8 +157,9 @@ Below is a big list of potential features to implement in the future.
 
 ### Database
 
-* Remote DB (PostgreSQL) integration
-* Redis integration to cache data.
+* Redis integration to cache data:
+    - https://realpython.com/caching-in-django-with-redis/
+    - https://testdriven.io/blog/django-caching/
 
 ### Async
 
@@ -168,6 +169,7 @@ Below is a big list of potential features to implement in the future.
 
 * Social media login: https://testdriven.io/blog/django-social-auth/
 * Extend user profile: https://testdriven.io/blog/django-custom-user-model/
+* Extend templates: https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Authentication
 
 ### RSS
 
@@ -185,10 +187,6 @@ Below is a big list of potential features to implement in the future.
 ### Additional functionalities
 
 * Sending emails, for example when user is registered or when password reset.
-* Cookies: https://www.tutorialspoint.com/django/django_cookies_handling.htm (High Prio)
-* Caching:
-    - https://www.tutorialspoint.com/django/django_caching.htm (High Prio)
-    - https://testdriven.io/blog/django-caching/
 * Stripe:
     - https://testdriven.io/blog/django-stripe-tutorial/
     - https://testdriven.io/blog/django-stripe-subscriptions/
