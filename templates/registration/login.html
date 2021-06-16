@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
-{% load i18n %}
 
 {% block title %}Account Login {% endblock %}
+
+{% load i18n %}
 
 {% block content %}
 <section id="login" class="col mt-3">
@@ -13,7 +14,7 @@
             <span class="px-2" style="font-weight: 600;">Login User</span>
           </div>
           <div class="card-body px-4">
-            <p class="title">Provide your username and password to login.</p>
+            <p class="lead">Provide your username and password to login.</p>
             <!-- Alerts
             {% include 'partials/_alerts.html' %}
             -->
@@ -31,8 +32,11 @@
 
               <input type="submit" value="Login" class="btn btn-success btn-sm mx-3 mt-3 float-end">
             </form>
-            <p>{% trans "Forgot password" %}? <a href="{% url 'password_reset' %}">{% trans "Reset it" %}</a>!</p>
-            <p>{% trans "Not member" %}? <a href="{% url 'register' %}">{% trans "Register" %}</a>!</p>
+          </div>
+          <hr class="text-center mx-auto text-muted" style="width: 85%;">
+          <div class="d-flex px-3 m-2 align-items-center justify-content-around">
+            <p>{% trans "Forgot password" %}? <a href="{% url 'password_reset' %}" class="btn btn-sm btn-warning">{% trans "Reset it" %}</a></p>
+            <p>{% trans "Not member" %}? <a href="{% url 'register' %}" class="btn btn-sm btn-success">{% trans "Register" %}</a></p>
           </div>
         </div>
       </div>

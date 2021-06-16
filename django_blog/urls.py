@@ -11,6 +11,7 @@ urlpatterns = [
     path('blog/', include('blog.urls')),
     path('admin/', admin.site.urls),
     path('dashboard/', include('dashboard.urls')),
+    path('accounts/logout', acc_views.logout, name='logout'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/authors', acc_views.authors, name='authors'),
     path('accounts/fixme', acc_views.fixme, name='fixme'),

@@ -169,6 +169,7 @@ CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = ("http://localhost:8080",)
 
 LOGIN_REDIRECT_URL = '/blog'
+LOGOUT_REDIRECT_URL = '/blog'
 
 """ try:
     from .local_settings import *

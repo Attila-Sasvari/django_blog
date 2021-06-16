@@ -1,6 +1,25 @@
 {% extends "base.html" %}
+
+{% block title %}Password reset complete{% endblock %}
+
 {% load i18n %}
 
 {% block content %}
-<p>{% trans "You are now registered. Activation email sent." %}</p>
+<section id="login" class="col mt-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mx-auto">
+                <div class="card mt-3 mb-4 shadow rounded">
+                    <div class="card-header linearbackground text-white" style="background-color: #81fbae">
+                        <span class="px-2" style="font-weight: 600;">User account message</span>
+                    </div>
+                    <div class="card-body px-4">
+                        <p class="lead">{% trans "You are now registered." %}</p>
+                        <p class="title">Activation email sent.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
 {% endblock %}
