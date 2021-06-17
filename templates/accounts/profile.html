@@ -15,6 +15,17 @@
           </div>
           <div class="card-body px-4">
             <p class="lead">Username: {{ username }}</strong></p>
+            {% if photo %}
+            <div class="profile-header-container text-center mb-3">
+              <div class="profile-header-img">
+                  <img class="img-circle"
+                      src="{{ photo }}" />
+                  <div class="rank-label-container">
+                      <span class="label label-default text-white small rank-label">{{ username }}</span>
+                  </div>
+              </div>
+            {% endif %}
+          </div>
             <p class="lead">Full name: {{ user.get_full_name }}</p>
             <p class="lead">Email address: {{ email }}</p>
             <p class="lead">Last login: {{ last_login }}</p>

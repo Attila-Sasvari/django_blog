@@ -169,7 +169,6 @@ Below is a big list of potential features to implement in the future.
 
 * Social media login: https://testdriven.io/blog/django-social-auth/
 * Extend user profile: https://testdriven.io/blog/django-custom-user-model/
-* Extend templates: https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Authentication
 
 ### RSS
 

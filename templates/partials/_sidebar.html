@@ -11,8 +11,10 @@
     {% if user.is_authenticated %}
     <div class="profile-header-container text-center w-75 mb-3">
         <div class="profile-header-img">
+            {% if user.profile.photo %}
             <img class="img-circle"
-                src="https://lh3.googleusercontent.com/-60pK_2LG9e4/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucnR3jXZZdznK-xkGPgJJQ_uW2K9Gg/photo.jpg?sz=120" />
+                src="{{ user.profile.photo.url }}" />
+            {% endif %}
             <div class="rank-label-container">
                 <span class="label label-default text-white small rank-label">{{ user.username }}</span>
             </div>

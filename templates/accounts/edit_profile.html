@@ -18,7 +18,7 @@
             <!-- Alerts
             {% include 'partials/_alerts.html' %}
             -->
-            <form method="post">
+            <form method="post" enctype="multipart/form-data" name="update_profile" action="{% url 'update_profile' %}">
               {% csrf_token %}
               {{ user_form.as_p }}
               {{ profile_form.as_p }}

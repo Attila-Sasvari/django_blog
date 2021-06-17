@@ -9,6 +9,7 @@ from .models import Profile
 def view_profile(request):
     if request.user.is_authenticated:
         user = request.user
+        print(user.profile)
         current_user = {
             "id": user.id,
             "username": user.username,
@@ -17,7 +18,8 @@ def view_profile(request):
             "last_name": user.last_name,
             "last_login": user.last_login,
             "is_superuser": 'Superuser' if user.is_superuser else 'Regular user',
-            "email": user.email
+            "email": user.email,
+            "photo": user.profile.photo.url if user.profile.photo else ''
         }
     else:
         return redirect('login')
@@ -35,12 +37,17 @@ def fixme(request):
 def authors(request):
     return render(request, 'authors.html')
 
+def handle_uploaded_file(f, filename):
+    with open('photos/%Y/%m/%d/', 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
+
 
 @transaction.atomic
 def update_profile(request):
     if request.method == 'POST':
         user_form = UserForm(request.POST, instance=request.user)
-        profile_form = ProfileForm(request.POST, instance=request.user.profile)
+        profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()

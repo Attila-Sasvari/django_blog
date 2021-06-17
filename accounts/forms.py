@@ -10,16 +10,17 @@ class UserForm(forms.ModelForm):
         widgets = {
             'first_name': forms.TextInput(attrs={'class': 'form-control'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'email': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.TextInput(attrs={'class': 'form-control'})
         }
 
 class ProfileForm(forms.ModelForm):
     birth_date = forms.DateField(label='Date of birth', widget=forms.SelectDateWidget(years=settings.YEAR_CHOICES, attrs={'class': 'form-control, m-2', }))
+    photo = forms.ImageField()
 
     class Meta:
         model = Profile
-        fields = ('bio', 'location', 'birth_date')
+        fields = ('bio', 'location', 'birth_date', 'photo')
         widgets = {
             'location': forms.TextInput(attrs={'class': 'form-control'}),
-            'bio': forms.Textarea(attrs={'class': 'form-control'}),
+            'bio': forms.Textarea(attrs={'class': 'form-control'})
         }

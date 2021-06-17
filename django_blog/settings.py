@@ -157,6 +157,7 @@ MESSAGE_TAGS = {
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 DEFUALT_COVER_IMG = 'default_cover_img.jpg'
+DEFUALT_PROFILE_IMG = 'default_profile_img.jpg'
 
 EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 EMAIL_FILE_PATH = str(BASE_DIR.joinpath('sent_emails'))
