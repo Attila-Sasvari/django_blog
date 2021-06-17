@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.conf import settings
-#from django.shortcuts import reverse
+from django.shortcuts import reverse
 
 
 class Tag(models.Model):
@@ -52,8 +52,8 @@ class Blog(models.Model):
     def __str__(self):
         return self.title
     
-"""     def get_absolute_url(self):
-        return reverse("blog:post", kwargs={"slug": self.slug}) """
+    def get_absolute_url(self):
+        return reverse("article", kwargs={"slug": self.slug})
 
 
 class BlogCounts(models.Model):

@@ -67,7 +67,7 @@
             </div>
             <div class="col-md-9">
                 <p class="card-text text-justify">{{ a.lead }}</p>
-                <a href="{% url 'article' a.id %}" class="btn btn-outline-dark btn-sm px-3 mb-2 float-end">Read the article</a>
+                <a href="{{ a.get_absolute_url }}" class="btn btn-outline-dark btn-sm px-3 mb-2 float-end">Read the article</a>
             </div>
         </div>
 

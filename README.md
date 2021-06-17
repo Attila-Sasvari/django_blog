@@ -16,12 +16,15 @@
 - GraphQL support with graphene-django.
 - Docker and Docker Compose support, separate environment for Dev and Prod instances, and linting.
 - Nginx support.
-- Authentication and user profiles with custom fields.
+- Authentication and user profiles with custom fields (including profile photo upload).
 - Blog posts can be written in Markdown and displayed as HTML.
+- Custom authentication/registration templates.
+- Send email when password change requested.
 - Count blog posts read number and possibility to upvote posts.
-- Possibility to upload images.
 - Collect statistics with a REST API (e.g. daily).
 - Customized Django Admin interface.
+- RSS and sitemap.
+- Sending email at registration.
 
 ## Installation and setup
 
@@ -168,12 +171,6 @@ Below is a big list of potential features to implement in the future.
 ### Authentication
 
 * Social media login: https://testdriven.io/blog/django-social-auth/
-* Extend user profile: https://testdriven.io/blog/django-custom-user-model/
-
-### RSS
-
-* https://www.tutorialspoint.com/django/django_rss.htm
-
 
 ### Periodic tasks
 
@@ -185,7 +182,6 @@ Below is a big list of potential features to implement in the future.
 
 ### Additional functionalities
 
-* Sending emails, for example when user is registered or when password reset.
 * Stripe:
     - https://testdriven.io/blog/django-stripe-tutorial/
     - https://testdriven.io/blog/django-stripe-subscriptions/

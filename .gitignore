@@ -4,3 +4,4 @@ __pycache__/
 *.log
 *.pot
 db.sqlite3
+sent_emails

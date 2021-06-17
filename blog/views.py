@@ -48,7 +48,7 @@ def my_articles(request):
 def my_drafts(request):
     articles = Blog.objects.order_by(
         '-updated_at').filter(is_published=False).filter(author=request.user)
-    paginator = Paginator(articles, 5)
+    paginator = Paginator(articles, 2)
     page = request.GET.get('page')
     paged_articles = paginator.get_page(page)
 
@@ -60,13 +60,14 @@ def my_drafts(request):
     return render(request, 'blog/blog.html', context)
 
 
-def article(request, blog_id):
-    article = get_object_or_404(Blog, pk=blog_id)
+def article(request, slug):
+    article = get_object_or_404(Blog, slug=slug)
     article.blogcounts.read_number += 1
     article.blogcounts.save(update_fields=['read_number'])
 
     context = {
         "id": article.id,
+        "slug": article.slug,
         "entry": md.convert(article.content),
         "title": article.title,
         "lead": article.lead,
@@ -84,14 +85,15 @@ def article(request, blog_id):
 
 @transaction.atomic
 @login_required
-def add_star(request, blog_id):
+def add_star(request, slug):
     if request.method == 'POST':
-        article = get_object_or_404(Blog, pk=blog_id)
+        article = get_object_or_404(Blog, slug=slug)
         article.blogcounts.stars_number += 1
         article.blogcounts.save(update_fields=['stars_number'])
 
         context = {
             "id": article.id,
+            "slug": article.slug,
             "entry": md.convert(article.content),
             "title": article.title,
             "lead": article.lead,
@@ -138,7 +140,7 @@ def search_blog(request):
         if title:
             articles_list = articles.filter(title__icontains=title)
 
-    paginator = Paginator(articles_list, 5)
+    paginator = Paginator(articles_list, 2)
     page = request.GET.get('page')
     paged_articles = paginator.get_page(page)
 

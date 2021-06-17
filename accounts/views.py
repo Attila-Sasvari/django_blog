@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, HttpResponse
+from django.core.mail import send_mail
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
 from django.db import transaction
@@ -9,7 +10,6 @@ from .models import Profile
 def view_profile(request):
     if request.user.is_authenticated:
         user = request.user
-        print(user.profile)
         current_user = {
             "id": user.id,
             "username": user.username,
@@ -95,6 +95,13 @@ def register(request):
                     user.save()
                     messages.success(
                         request, 'You are now registered and can log in')
+
+                    subject = 'Thank you for registering to our site.'
+                    message = 'This is our confirmation letter about your successfull registration.'
+                    email_from = 'django_blog@example.cmm'
+                    recipient_list = ['reciever@example.com', ]
+                    send_mail(subject, message, email_from, recipient_list)
+                    
                     return redirect('login')
         else:
             messages.error(request, 'Passwords do not match')

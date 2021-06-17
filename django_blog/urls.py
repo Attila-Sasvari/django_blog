@@ -6,9 +6,14 @@ from django.conf.urls.static import static
 from django.views.decorators.csrf import csrf_exempt
 from graphene_django.views import GraphQLView
 from accounts import views as acc_views
+from .feeds import LatestPostsFeed
+from django.contrib.sitemaps.views import sitemap
+from .sitemaps import BlogSitemap
+
 
 urlpatterns = [
     path('blog/', include('blog.urls')),
+    path("feed/rss", LatestPostsFeed(), name="post_feed"),
     path('admin/', admin.site.urls),
     path('dashboard/', include('dashboard.urls')),
     path('accounts/logout', acc_views.logout, name='logout'),
@@ -22,6 +27,7 @@ urlpatterns = [
     path('api/v1/', include('api.urls')),
     path("graphql/", csrf_exempt(GraphQLView.as_view(graphiql=True))),
     path("file-upload/", include('upload.urls')),
+    path("sitemap.xml", sitemap, {"sitemaps": {'blog': BlogSitemap}}, name ="sitemap"),
 ]
 
 if bool(settings.DEBUG):
