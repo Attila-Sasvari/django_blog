@@ -67,6 +67,9 @@ $ python manage.py makemigrations
 $ python manage.py migrate --noinput
 $ python manage.py collectstatic --no-input --clear
 
+# execute only if you want two default user and one blog post
+$ python manage.py loaddata fixtures_pretty.json
+
 # create super user account
 $ python manage.py createsuperuser
 
@@ -84,9 +87,14 @@ $ docker-compose -f docker-compose.yml up -d --build
 $ docker-compose -f docker-compose.yml exec web python manage.py makemigrations
 $ docker-compose -f docker-compose.yml exec web python manage.py migrate --noinput
 $ docker-compose -f docker-compose.yml exec web python manage.py collectstatic --no-input --clear
+
+# execute only if you want two default user and one blog post
+$ docker-compose -f docker-compose.yml exec web python manage.py loaddata fixtures_pretty.json
 ```
 
-Note: For production environment, use the same commands, but instead of `docker-compose.yml`, use `docker-compose.prod.yml`.
+Notes:
+- For production environment, use the same commands, but instead of `docker-compose.yml`, use `docker-compose.prod.yml`.
+- If you need an admin and an other staff users in the database, as well as a blog post, execute the `python manage.py loaddata fixtures_pretty.json` as mentioned above. The user `admin` the following password assigned: `admin123`. No need to say that you should change that.
 
 
 ### How to connect to the database

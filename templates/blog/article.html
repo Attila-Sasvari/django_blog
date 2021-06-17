@@ -23,10 +23,11 @@
         </p>
         <p class="card-text mb-0 mt-2 text-muted small">Tags: <small class="text-muted small">#redhat #certification</small></p>
         <br>
-        <img src="{{ cover_img }}" class="img-fluid w-75 align-items-center d-flex mx-auto" alt="...">
+        <!-- <img src="{{ cover_img }}" class="img-fluid w-75 align-items-center d-flex mx-auto" alt="..."> -->
         {{ entry | safe }}
+        <br>
         <div class="d-flex flex-rowfloat-end align-items-center">
-            <form method="post" name="add_star" action="{% url 'add_star' id %}">
+            <form method="post" name="add_star" action="{% url 'add_star' slug %}">
                 {% csrf_token %}
                 <button type="submit" class="btn btn-sm btn-warning">Upvote</button>
             </form>

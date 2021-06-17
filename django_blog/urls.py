@@ -12,10 +12,9 @@ from .sitemaps import BlogSitemap
 
 
 urlpatterns = [
-    path('blog/', include('blog.urls')),
     path("feed/rss", LatestPostsFeed(), name="post_feed"),
     path('admin/', admin.site.urls),
-    path('dashboard/', include('dashboard.urls')),
+    path('dashboard', include('dashboard.urls')),
     path('accounts/logout', acc_views.logout, name='logout'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/authors', acc_views.authors, name='authors'),
@@ -28,6 +27,7 @@ urlpatterns = [
     path("graphql/", csrf_exempt(GraphQLView.as_view(graphiql=True))),
     path("file-upload/", include('upload.urls')),
     path("sitemap.xml", sitemap, {"sitemaps": {'blog': BlogSitemap}}, name ="sitemap"),
+    path('', include('blog.urls')),
 ]
 
 if bool(settings.DEBUG):
