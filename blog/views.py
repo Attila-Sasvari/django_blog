@@ -72,7 +72,6 @@ def article(request, slug):
         "title": article.title,
         "lead": article.lead,
         "tags": article.tags,
-        "category": article.category,
         "author": article.author,
         "updated_at": article.updated_at,
         "read_number": article.blogcounts.read_number,
@@ -97,7 +96,6 @@ def add_star(request, slug):
             "entry": md.convert(article.content),
             "title": article.title,
             "lead": article.lead,
-            "category": article.category,
             "author": article.author,
             "updated_at": article.updated_at,
             "read_number": article.blogcounts.read_number,
@@ -112,23 +110,11 @@ def add_star(request, slug):
 
 def search_blog(request):
     articles = Blog.objects.order_by('-updated_at')
-    #articles_list = []
-
-    category_list = {
-        "tech": 'tech',
-        "fitnes": 'fitnes',
-        "money": 'money'
-    }
 
     if 'content' in request.GET:
         content = request.GET['content']
         if content:
             articles_list = articles.filter(content__icontains=content)
-
-    if 'category' in request.GET:
-        category = request.GET['category']
-        if category:
-            articles_list = articles.filter(category__iexact=category)
 
     if 'lead' in request.GET:
         lead = request.GET['lead']
@@ -146,7 +132,6 @@ def search_blog(request):
 
     context = {
         'articles': paged_articles,
-        'category_list': category_list,
         'to_edit': False
     }
 

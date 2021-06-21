@@ -1,10 +1,9 @@
 import graphene
 from django.conf import settings
 from graphene_django import DjangoObjectType
-
-from .models import Blog, BlogCounts, Tag
 from django.contrib.auth.models import User
 from accounts.models import Profile
+from .models import Blog, BlogCounts, Tag
 
 
 class UserType(DjangoObjectType):

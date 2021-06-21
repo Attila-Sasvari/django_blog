@@ -25,6 +25,7 @@
 - Customized Django Admin interface.
 - RSS and sitemap.
 - Sending email at registration.
+- Load data from json.
 
 ## Installation and setup
 
@@ -158,8 +159,10 @@ Below is a big list of potential features to implement in the future.
 
 ### Design updates
 
-* Vue frontend that gets data from Django app through GraphQL or REST API.
-* Further customize the admin page.
+* Vue frontend that gets data from Django app through GraphQL or REST API. Prerequisite:
+    - add more REST API or GraphQL endpoints.
+* Further customize the admin page. Some idea:
+    - Custom icon and colors.
 
 ### APIs
 

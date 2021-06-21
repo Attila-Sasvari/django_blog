@@ -6,4 +6,5 @@ from .models import Profile
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'photo')
 
+
 admin.site.register(Profile, ProfileAdmin)

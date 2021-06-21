@@ -1,7 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Profile
 from django.conf import settings
+from .models import Profile
+
 
 class UserForm(forms.ModelForm):
     class Meta:
@@ -13,8 +14,10 @@ class UserForm(forms.ModelForm):
             'email': forms.TextInput(attrs={'class': 'form-control'})
         }
 
+
 class ProfileForm(forms.ModelForm):
-    birth_date = forms.DateField(label='Date of birth', widget=forms.SelectDateWidget(years=settings.YEAR_CHOICES, attrs={'class': 'form-control, m-2', }))
+    birth_date = forms.DateField(label='Date of birth', widget=forms.SelectDateWidget(
+        years=settings.YEAR_CHOICES, attrs={'class': 'form-control, m-2', }))
     photo = forms.ImageField()
 
     class Meta:

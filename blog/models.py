@@ -14,20 +14,11 @@ class Tag(models.Model):
 
 
 class Blog(models.Model):
-    CATEGORIES = [
-        ("tech", 'tech'),
-        ("fitnes", 'fitnes'),
-        ("money", 'money'),
-    ]
     title = models.CharField(max_length=200, unique=True)
     lead = models.TextField(blank=False)
-    category = models.CharField(
-        max_length=10,
-        choices=CATEGORIES,
-        default="tech",
-    )
     slug = models.SlugField(max_length=255, unique=True, null=True)
-    cover_img = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True, default=settings.DEFUALT_COVER_IMG)
+    cover_img = models.ImageField(
+        upload_to='photos/%Y/%m/%d/', blank=True, default=settings.DEFUALT_COVER_IMG)
     author = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
     content = models.TextField(default="-")
     created_at = models.DateTimeField(auto_now_add=True)
@@ -39,7 +30,7 @@ class Blog(models.Model):
     class Meta:
         ordering = ["-updated_at"]
         app_label = "blog"
-    
+
     @property
     def img_url(self):
         return self.cover_img.url
@@ -51,7 +42,7 @@ class Blog(models.Model):
 
     def __str__(self):
         return self.title
-    
+
     def get_absolute_url(self):
         return reverse("article", kwargs={"slug": self.slug})
 
